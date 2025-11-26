@@ -190,15 +190,15 @@ async def post_cadastrar(
 ):
     """Processa cadastro de novo usuário"""
     try:
-        # Rate limiting por IP
-        ip = obter_identificador_cliente(request)
-        if not cadastro_limiter.verificar(ip):
-            informar_erro(
-                request,
-                f"Muitas tentativas de cadastro. Aguarde {cadastro_limiter.janela_minutos} minuto(s).",
-            )
-            logger.warning(f"Rate limit de cadastro excedido para IP: {ip}")
-            return RedirectResponse("/cadastrar", status_code=status.HTTP_303_SEE_OTHER)
+        # Rate limiting por IP - DESABILITADO
+        # ip = obter_identificador_cliente(request)
+        # if not cadastro_limiter.verificar(ip):
+        #     informar_erro(
+        #         request,
+        #         f"Muitas tentativas de cadastro. Aguarde {cadastro_limiter.janela_minutos} minuto(s).",
+        #     )
+        #     logger.warning(f"Rate limit de cadastro excedido para IP: {ip}")
+        #     return RedirectResponse("/cadastrar", status_code=status.HTTP_303_SEE_OTHER)
 
         # Armazena os dados do formulário para reexibição em caso de erro
         dados_formulario = {"perfil": perfil, "nome": nome, "email": email}
